@@ -1,5 +1,5 @@
 @echo off
-title Dark Star VPN Setup
+title Tony Tunnel VPN Setup
 @REM :VBSDynamicBuild
 @REM SET TempVBSFile=%temp%\~tmpSendKeysTemp.vbs
 @REM IF EXIST "%TempVBSFile%" DEL /F /Q "%TempVBSFile%"
@@ -125,7 +125,7 @@ if %errorlevel% neq 0 goto :E_Ps
 setlocal EnableDelayedExpansion
 cd /d "!_work!"
 
-color 2
+
 echo.
 echo                                              - Powered by Tony Tunnel (https://tonytunnel.xyz)
 echo                                              - Inspired by Arc Reactor
@@ -133,7 +133,7 @@ echo.
 echo Note:
 echo 1. Download Your Profile i.e. "YourName.DarkStar".
 echo 2. VPN Installer Must Be in Same folder.
-echo 3. And Then Run this Dark Star VPN Setup.
+echo 3. And Then Run this Tony Tunnel VPN Setup.
 echo 4. Enjoy Our Service...
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -179,9 +179,7 @@ if not exist "!p12_file!" (
   goto :Enter_Client_Name
 )
 color 4
-@REM sumit put the ip of the server
 set server_addr=IP
-echo %server_addr%
 set "server_addr=%server_addr:"=%"
 set "server_addr=%server_addr: =%"
 
@@ -202,7 +200,7 @@ if !errorlevel! equ 0 (
 )
 
 :Enter_Conn_Name
-set "conn_name=DarkStar"
+set "conn_name=Tony Tunnel"
 set "conn_name=%conn_name:"=%"
 if defined conn_name_gen (
   if not defined conn_name set "conn_name=%conn_name_gen%"
@@ -217,12 +215,12 @@ if !errorlevel! equ 0 (
   echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   echo.
-  echo ERROR: Remove OLD Dark Star VPN PROfile !!!
+  echo ERROR: Remove OLD Tony Tunnel VPN !!!
   echo.
-  echo Follow The Instruction to Delete the  PROfile:
+  echo Follow The Instruction to Delete the Profile:
   echo.
-  echo Window Search Bar "VPN Setting"
-  echo Remove VPN Profile Name "DarkStar"
+  echo Search "VPN Setting" by pressing Windows
+  echo Remove VPN Profile Name "Tony Tunnel"
   echo.
   echo Then Continue the installing....Try Again
   echo.
@@ -275,14 +273,13 @@ echo      ..: .. . :.:........  .  .           . : . : .: -..
 color b
 timeout /t 2 >nul
 cls
-echo Creating Connection......
-                                                                      
+echo Creating Connection......                                                                      
 )
 
 
 powershell -command "Add-VpnConnection -ServerAddress '%server_addr%' -Name '%conn_name%' -TunnelType IKEv2 -AuthenticationMethod MachineCertificate -EncryptionLevel Required -PassThru"
 if !errorlevel! neq 0 (
-  echo ERROR: Could not create the DarkStar VPN. Contact Admin for Support https://tonytunnel.xyz/support
+  echo ERROR: Could not create the Tony Tunnel VPN. Contact for Support contact@tonytunnel.xyz
   color 4
   goto :Done
 )
@@ -325,15 +322,15 @@ timeout /t 2 >nul
 cls
 
 )
-echo Configuring DarkStar VPN
+echo Configuring Tony Tunnel VPN
 powershell -command "Set-VpnConnectionIPsecConfiguration -ConnectionName '%conn_name%' -AuthenticationTransformConstants GCMAES128 -CipherTransformConstants GCMAES128 -EncryptionMethod AES256 -IntegrityCheckMethod SHA256 -PfsGroup None -DHGroup Group14 -PassThru -Force"
 if !errorlevel! neq 0 (
-  echo Could not create the DarkStar VPN. Contact Admin for Support https://tonytunnel.xyz/support
+  echo Could not create the Tony Tunnel VPN. Contact for Support contact@tonytunnel.xyz
   color 4
   goto :Done
 )
 
-echo DarkStar VPN Profile configuration successfully imported ^_^
+echo Tony Tunnel VPN Profile configuration successfully imported ^_^
 echo To connect to the VPN, click on the wireless/network icon in your system tray,
 echo select the "%conn_name%" VPN entry, and click Connect.
 goto :Done
@@ -347,7 +344,7 @@ goto :Done
 :E_Win
 echo %_err%
 echo This script requires Windows 8, 10 or 11.
-echo Windows 7 users can't install. Contact Admin for Support https://tonytunnel.xyz/support
+echo Windows 7 users can't install. Contact for Support contact@tonytunnel.xyz
 echo Or Upgrade Your Windows OS.
 goto :Done
 
@@ -366,7 +363,7 @@ goto :Done
 :Abort
 echo.
 echo Abort. No changes were made.
-echo Contact Admin for Support https://tonytunnel.xyz/support
+echo Contact for Support contact@tonytunnel.xyz
 
 :Done
 timeout /t 10
