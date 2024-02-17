@@ -90,14 +90,13 @@ for /l %%i in (1, 1, 1) do (
 )
 timeout /t 4 >nul
 cls
-echo 8888888b.                   888            .d8888b.  888                    
-echo 888  "Y88b                  888           d88P  Y88b 888                    
-echo 888    888                  888           Y88b.      888                    
-echo 888    888  8888b.  888d888 888  888       "Y888b.   888888  8888b.  888d888
-echo 888    888     "88b 888P"   888 .88P          "Y88b. 888        "88b 888P"  
-echo 888    888 .d888888 888     888888K             "888 888    .d888888 888    
-echo 888  .d88P 888  888 888     888 "88b      Y88b  d88P Y88b.  888  888 888    
-echo 8888888P"  "Y888888 888     888  888       "Y8888P"   "Y888 "Y888888 888       
+
+echo   ______                     ______                       __
+echo  /_  __/___  ____  __  __   /_  __/_  ______  ____  ___  / /
+echo   / / / __ \/ __ \/ / / /    / / / / / / __ \/ __ \/ _ \/ / 
+echo  / / / /_/ / / / / /_/ /    / / / /_/ / / / / / / /  __/ /  
+echo /_/  \____/_/ /_/\__, /    /_/  \__,_/_/ /_/_/ /_/\___/_/   
+echo                 /____/          
 
 
 setlocal DisableDelayedExpansion
@@ -131,10 +130,9 @@ echo                                              - Powered by Tony Tunnel (http
 echo                                              - Inspired by Arc Reactor
 echo.                 
 echo Note:
-echo 1. Download Your Profile i.e. "YourName.DarkStar".
-echo 2. VPN Installer Must Be in Same folder.
-echo 3. And Then Run this Tony Tunnel VPN Setup.
-echo 4. Enjoy Our Service...
+echo 1. VPN Profile "your_file.p12"
+echo 2. Automatically detected [your_file]
+echo 3. Just Press Enter
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -160,7 +158,7 @@ if defined client_name_gen (
 )
 set "client_name=%client_name:"=%"
 set "client_name=%client_name: =%"
-set "p12_file_temp=%_work%\!client_name!.DarkStar"
+set "p12_file_temp=%_work%\!client_name!.p12"
 
 if exist "!p12_file_temp!" (
   set "p12_file_new=%_work%\!client_name!.p12"
@@ -179,7 +177,7 @@ if not exist "!p12_file!" (
   goto :Enter_Client_Name
 )
 color 4
-set server_addr=IP
+set server_addr=Input IP
 set "server_addr=%server_addr:"=%"
 set "server_addr=%server_addr: =%"
 
@@ -238,44 +236,13 @@ certutil -f -importpfx "%p12_file%" NoExport
 if !errorlevel! neq 0 goto :Import_P12
 
 :Create_Conn
-@REM animation for connection
-for /l %%i in (1, 1, 1) do (     
-color 4                                                                                                                                                                                                        
-echo                                        -:..                
-echo                             ..:::::::: ... ...:.           
-echo                           .:.   .... ..:-..  . :=:.        
-echo                         ...  ..   ...   .:..-  - -:        
-echo                     .....   .   ......  ... .. :   :       
-echo                   ......           ....     :     ..       
-echo                 .-.       .. ....::.....   .     .         
-echo                 :      .:                 ...    .         
-echo                 :    .. :                    .....:        
-echo                  :   .  :        ..            .  .:       
-echo                  ..    ..       .  .::..       .. :        
-echo                  :     ..                       :.         
-echo                 ..:. .      ...                 ..         
-echo                 ::.-:.  .:-::::-=-:::::-----::  ::         
-echo                 -... ..:.  :-==--.:...---:-::.:-=+         
-echo                 -.. . .-    .:..  :..:. :.:..  : =         
-echo                  -.    =         -.  ::        :-.         
-echo                  .:.    ::::..::::   .-:.     .:=          
-echo                    .:          .:.    -:..::::: -          
-echo                     =        ..  ...... :     :.           
-echo                     ::      .............:    .            
-echo                      =.     ::---::-----::.  :             
-echo                    :- .:   :    :....:.     :              
-echo                  ... :  ::.:     :..:.    .:               
-echo                 ::... .   .:     .  ..   ::                
-echo               .-:.:::....   .:..      ::::..               
-echo             .:=:.. ... ....   ..... ...  : .:-:..          
-echo          ... :.:.::.......  .             . : .: --:.      
-echo      ..: .. . :.:........  .  .           . : . : .: -..                                                                                                                                                                                    
-color b
+cls
+color 7
+echo Contacting Server...
+timeout /t 2 >nul
+echo Configuring Tony Tunnel VPN...
 timeout /t 2 >nul
 cls
-echo Creating Connection......                                                                      
-)
-
 
 powershell -command "Add-VpnConnection -ServerAddress '%server_addr%' -Name '%conn_name%' -TunnelType IKEv2 -AuthenticationMethod MachineCertificate -EncryptionLevel Required -PassThru"
 if !errorlevel! neq 0 (
@@ -284,45 +251,6 @@ if !errorlevel! neq 0 (
   goto :Done
 )
 
-
-for /l %%i in (1, 1, 1) do (
-
-echo                                   .::------::.                                 
-echo                              :==--::.     .::-====                             
-echo                         :==   *-                *:  :=:                        
-echo                      .=+- -+   ++             .*:  =+.:+=.                     
-echo                    .+=     :*   -*           :*   +=     =+.                   
-echo                   +*:.......-#.  -*         -*   *-       .=+                  
-echo                  .:-----------:   .==========   .:----------::                 
-echo                    :::::::::::::::::::::::::::::::::::::::::                   
-echo                   -==**-...............................:=#==+                  
-echo               -#=  +%=+++=:                         .-=++=+#.  **              
-echo              .# +=  =+ :=+===-----=========--------==++-.:*  .#.-+             
-echo              +-  =+  -+   :*: :=---------------==  *=   -+  .*.  #.            
-echo              %    -#  :#.   +- +=             .*..*.   =+  .*    --            
-echo             .#     :#. .*.   == -+           :* :*.   *=  -*     -=            
-echo              *======+=   *:   -+ -*         :* -#    *:  .+======+-            
-echo              ...........  *-   :*.:#.      =+ =+   .*.  .:::::::::.            
-echo             .%-::-:-:::++  +=   .*..*.    *= +-   :#. .*-::::::::-*            
-echo              *:         -*  -+    *: *:  *: +-   :*  .*:         +-            
-echo             .#          :*  -*    *- *=*:.*:   -*  :*          .#             
-echo               =*          .*: :#.   =+ -..*.   +=  =+           #.             
-echo                =*          *-  .*:   -+ :*    *-   ++         .*:              
-echo                 :*.       *-     +:   *-#    *:     -+       :*.               
-echo                  .*=     *.  -#:  *-  +-#  .#.  =#:  -*    .+=                 
-echo                    :+- .*.  == +=  += +-# :#.  *- *=  :#..++.                  
-echo                      :**.  *=   =+  -+*-#-*  .*.   =+  .*=                     
-echo                           #-     :+  :#=#+  :*.     *=                         
-echo                            -===:. .#. ..:  -*  :-==-.                          
-echo                                .--===     .+=--..                              
-
-color 9
-echo Tony Tunnel Arc is Processing...
-timeout /t 2 >nul
-cls
-
-)
-echo Configuring Tony Tunnel VPN
 powershell -command "Set-VpnConnectionIPsecConfiguration -ConnectionName '%conn_name%' -AuthenticationTransformConstants GCMAES128 -CipherTransformConstants GCMAES128 -EncryptionMethod AES256 -IntegrityCheckMethod SHA256 -PfsGroup None -DHGroup Group14 -PassThru -Force"
 if !errorlevel! neq 0 (
   echo Could not create the Tony Tunnel VPN. Contact for Support contact@tonytunnel.xyz
