@@ -176,8 +176,30 @@ if not exist "!p12_file!" (
   echo You must put the profile in the same folder...
   goto :Enter_Client_Name
 )
+
+:menu
+echo Please select your Purchased Plan option:
+echo 1. Free Plan
+echo 2. Limited Plan
+echo 3. Basic Plan
+set /p option=Enter your choice (1, 2, or 3):
+
+if "%option%"=="1" (
+    set "server_addr=IP"
+) else if "%option%"=="2" (
+    set "server_addr=IP"
+) else if "%option%"=="3" (
+    set "server_addr=IP"
+) else (
+    echo Invalid option. Please select your purchased plan
+    echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    goto menu
+)
+
+REM echo Server address set to: %server_addr%
+
 color 4
-set server_addr=Input IP
 set "server_addr=%server_addr:"=%"
 set "server_addr=%server_addr: =%"
 
